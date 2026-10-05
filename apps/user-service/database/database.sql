@@ -79,9 +79,10 @@ GO
 
 
 -- =====================================================
--- 6. XOA BANG CU NEU TON TAI
+-- 6. XOA CAC BANG CU NEU TON TAI
 -- =====================================================
 
+-- Cuối cùng mới xóa sinhvien
 IF OBJECT_ID('dbo.sinhvien', 'U') IS NOT NULL
 BEGIN
     DROP TABLE dbo.sinhvien;
