@@ -1,13 +1,34 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TopicListComponent } from './components/topic-list/topic-list'; 
+import { CommonModule } from '@angular/common';
+import { TopicListComponent } from './components/topic-list/topic-list';
+import { ApiService } from './services/api';
 
 @Component({
-  imports: [RouterOutlet, TopicListComponent],
   selector: 'app-root',
-  styleUrl: './app.css',
+  standalone: true,
+  imports: [RouterOutlet, CommonModule, TopicListComponent],
   templateUrl: './app.html',
+  styleUrl: './app.css',
 })
-export class App {
-  protected readonly title = signal('client');
+export class App implements OnInit {
+  response: any = null;
+  error: string = '';
+
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit() {
+    this.testConnection();
+  }
+
+  testConnection() {
+    this.apiService.checkHello().subscribe({
+      next: (data) => {
+        this.response = data;
+      },
+      error: (err) => {
+        this.error = err.message;
+      }
+    });
+  }
 }
