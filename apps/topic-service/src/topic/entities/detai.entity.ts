@@ -3,22 +3,22 @@ import { DangKy } from './dangky.entity';
 
 @Entity('detai')
 export class DeTai {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'madetai' })
   id: number;
 
-  @Column({ length: 255 })
+  @Column({ name: 'tendetai', length: 200 })
   tendetai: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ name: 'mota', type: 'nvarchar', length: 'max', nullable: true })
   mota: string;
 
-  @Column({ length: 100 })
+  @Column({ name: 'giangvien', length: 100 })
   giangvien: string;
 
-  @Column({ type: 'int', default: 5 })
+  @Column({ name: 'soluongtoida', type: 'int' })
   soluongtoida: number;
 
-  @Column({ type: 'int', default: 0 })
+  @Column({ name: 'soluongdadangky', type: 'int', default: 0 })
   soluongdadangky: number;
 
   @OneToMany(() => DangKy, (dangky) => dangky.detai)
