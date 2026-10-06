@@ -84,3 +84,71 @@
   gap: 10px;
   margin-top: 16px;
 }
+
+/* Tiêu đề & Đề tài trong Modal */
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 6px;
+  color: #1e293b;
+  font-size: 1.25rem;
+}
+
+.topic-subtitle {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.topic-subtitle span {
+  font-weight: 600;
+  color: #007bff;
+}
+
+/* Khung cuộn cho Bảng trong Modal */
+.modal-body {
+  max-height: 380px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+/* Định dạng Bảng Modal */
+.styled-table {
+  background-color: #ffffff;
+}
+
+.styled-table thead th {
+  background-color: #f8fafc;
+  color: #334155;
+  font-weight: 600;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Bổ sung class Căn giữa & Badge Mã SV */
+.text-center {
+  text-align: center !important;
+}
+
+.fw-bold {
+  font-weight: 600;
+  color: #64748b;
+}
+
+.badge-sv {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+.empty-msg {
+  color: #94a3b8;
+  font-style: italic;
+}

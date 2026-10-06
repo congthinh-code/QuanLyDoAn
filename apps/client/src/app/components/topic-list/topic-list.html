@@ -88,38 +88,44 @@
 
   <!-- MODAL DANH SÁCH SV ĐĂNG KÝ -->
   @if (showStudentsModal) {
-    <div class="modal-overlay">
-      <div class="modal-content large">
+  <div class="modal-overlay">
+    <div class="modal-content large">
+      <div class="modal-header">
         <h3>Danh Sách Sinh Viên Đăng Ký</h3>
-        <p><em>Đề tài: {{ selectedTopicTitleForStudents }}</em></p>
-        
-        <table class="styled-table">
-          <thead>
-            <tr>
-              <th>ID Đăng Ký</th>
-              <th>Mã Sinh Viên</th>
-              <th>Ngày Đăng Ký</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (sv of registeredStudents; track (sv.id || $index)) {
+        <p class="topic-subtitle">Đề tài: <span>{{ selectedTopicTitleForStudents }}</span></p>
+      </div>
+      
+      <div class="modal-body">
+        @if (registeredStudents && registeredStudents.length > 0) {
+          <table class="styled-table">
+            <thead>
               <tr>
-                <td>{{ sv.id }}</td>
-                <td><strong>{{ sv.masv }}</strong></td>
-                <td>{{ sv.ngay_dangky ? (sv.ngay_dangky | date:'dd/MM/yyyy HH:mm') : '' }}</td>
+                <th class="text-center" style="width: 15%;">STT</th>
+                <th class="text-center" style="width: 25%;">ID Đăng Ký</th>
+                <th class="text-center" style="width: 25%;">Mã Sinh Viên</th>
+                <th class="text-center" style="width: 35%;">Ngày Đăng Ký</th>
               </tr>
-            } @empty {
-              <tr>
-                <td colspan="3" style="text-align: center;">Chưa có sinh viên nào đăng ký đề tài này.</td>
-              </tr>
-            }
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              @for (sv of registeredStudents; track sv.id; let i = $index) {
+                <tr>
+                  <td class="text-center fw-bold">{{ i + 1 }}</td>
+                  <td class="text-center">{{ sv.id }}</td>
+                  <td class="text-center"><span class="badge-sv">{{ sv.masv }}</span></td>
+                  <td class="text-center">{{ sv.ngay_dangky | date:'dd/MM/yyyy HH:mm' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        } @else {
+          <p class="text-center py-3 empty-msg">Chưa có sinh viên nào đăng ký đề tài này.</p>
+        }
+      </div>
 
-        <div class="modal-actions">
-          <button class="btn btn-cancel" (click)="showStudentsModal = false">Đóng</button>
-        </div>
+      <div class="modal-actions">
+        <button class="btn btn-cancel" (click)="showStudentsModal = false">Đóng</button>
       </div>
     </div>
-  }
+  </div>
+}
 </div>
