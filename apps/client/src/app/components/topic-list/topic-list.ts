@@ -92,22 +92,20 @@ export class TopicListComponent implements OnInit {
   viewStudents(topic: Topic): void {
   if (!topic) return;
 
-  // Lấy ID đề tài tùy theo định dạng key backend trả về
   const topicId = (topic as any).id || (topic as any).madetai;
   this.selectedTopicTitleForStudents = topic.tendetai;
   this.registeredStudents = [];
 
   this.topicService.getRegisteredStudents(topicId).subscribe({
-    next: (students: any) => {
-      console.log('=== Dữ liệu SV từ Backend NestJS ===', students);
-      this.registeredStudents = Array.isArray(students)
-        ? students
-        : (students as any)?.data || [];
+    next: (res: any) => {
+      console.log('Dữ liệu Backend:', res);
+      // Lấy đúng mảng danhSachSinhVien từ response
+      this.registeredStudents = res?.danhSachSinhVien || (Array.isArray(res) ? res : []);
       this.showStudentsModal = true;
-      this.cdr.detectChanges();
+      this.cdr.detectChanges(); // Ép Angular cập nhật lại UI
     },
     error: (err: any) => {
-      console.error('Lỗi lấy danh sách sinh viên đăng ký:', err);
+      console.error('Lỗi khi lấy danh sách sinh viên:', err);
     }
   });
 }
