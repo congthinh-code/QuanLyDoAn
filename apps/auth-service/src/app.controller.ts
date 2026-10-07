@@ -9,7 +9,8 @@ export class AppController {
   constructor(private authService: AppService) {}
 
   @Post('login')
-  async login(@Body() body: Record<string, any>) {
+  async login(@Body() body: { username: string; password: string }) {
+    // TRUYỀN DÚNG body.username VÀ body.password VÀO SERVICE
     return this.authService.login(body.username, body.password);
   }
 
