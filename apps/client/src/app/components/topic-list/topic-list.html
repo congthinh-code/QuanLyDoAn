@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="header">
+    <h2>Quản Lý Đồ Án</h2>
+    <button class="btn btn-primary" (click)="openCreateModal()">+ Tạo Đề Tài Mới</button>
+  </div>
+
+  <!-- BẢNG DANH SÁCH ĐỀ TÀI CHÍNH -->
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Mã Đề Tài</th>
+        <th>Tên đề tài</th>
+        <th>Giảng viên</th>
+        <th>Số lượng tối đa</th>
+        <th>Đã đăng ký</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of topics; track (item.madetai || item.id || $index)) {
+        <tr>
+          <td>{{ item.madetai ?? item.id }}</td>
+          <td><strong>{{ item.tendetai }}</strong></td>
+          <td>{{ item.giangvien }}</td>
+          <td>{{ item.soluongtoida }}</td>
+          <td>{{ item.soluongdadangky ?? 0 }}</td>
+          <td>
+            <button class="btn btn-info" (click)="viewDetail((item.madetai || item.id)!)">Chi tiết</button>
+            <button class="btn btn-secondary" (click)="viewStudents(item)">SV Đăng ký</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="6" style="text-align: center;">Chưa có đề tài nào.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <!-- MODAL TẠO ĐỀ TÀI -->
+  @if (showCreateModal) {
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <h3>Tạo Đề Tài Đồ Án Mới</h3>
+        <form (ngSubmit)="onCreateTopic()">
+          <div class="form-group">
+            <label>Tên đề tài:</label>
+            <input type="text" [(ngModel)]="newTopic.tendetai" name="tendetai" required />
+          </div>
+          <div class="form-group">
+            <label>Mô tả:</label>
+            <textarea [(ngModel)]="newTopic.mota" name="mota" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Giảng viên hướng dẫn:</label>
+            <input type="text" [(ngModel)]="newTopic.giangvien" name="giangvien" required />
+          </div>
+          <div class="form-group">
+            <label>Số lượng SV tối đa:</label>
+            <input type="number" [(ngModel)]="newTopic.soluongtoida" name="soluongtoida" min="1" required />
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-cancel" (click)="showCreateModal = false">Hủy</button>
+            <button type="submit" class="btn btn-primary">Lưu Đề Tài</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <!-- MODAL XEM CHI TIẾT -->
+  @if (showDetailModal && selectedTopic) {
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <h3>Thông Tin Chi Tiết Đề Tài</h3>
+        <p><strong>Mã đề tài:</strong> {{ selectedTopic.madetai ?? selectedTopic.id }}</p>
+        <p><strong>Tên đề tài:</strong> {{ selectedTopic.tendetai }}</p>
+        <p><strong>Mô tả:</strong> {{ selectedTopic.mota }}</p>
+        <p><strong>Giảng viên:</strong> {{ selectedTopic.giangvien }}</p>
+        <p><strong>Số lượng tối đa:</strong> {{ selectedTopic.soluongtoida }}</p>
+        <p><strong>Đã đăng ký:</strong> {{ selectedTopic.soluongdadangky ?? 0 }}</p>
+        <div class="modal-actions">
+          <button class="btn btn-cancel" (click)="showDetailModal = false">Đóng</button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- MODAL DANH SÁCH SV ĐĂNG KÝ -->
+  @if (showStudentsModal) {
+  <div class="modal-overlay">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3>Danh Sách Sinh Viên Đăng Ký</h3>
+        <p class="topic-subtitle">Đề tài: <span>{{ selectedTopicTitleForStudents }}</span></p>
+      </div>
+      
+      <div class="modal-body">
+        @if (registeredStudents && registeredStudents.length > 0) {
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 15%;">STT</th>
+                <th class="text-center" style="width: 25%;">ID Đăng Ký</th>
+                <th class="text-center" style="width: 25%;">Mã Sinh Viên</th>
+                <th class="text-center" style="width: 35%;">Ngày Đăng Ký</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (sv of registeredStudents; track sv.id; let i = $index) {
+                <tr>
+                  <td class="text-center fw-bold">{{ i + 1 }}</td>
+                  <td class="text-center">{{ sv.id }}</td>
+                  <td class="text-center"><span class="badge-sv">{{ sv.masv }}</span></td>
+                  <td class="text-center">{{ sv.ngay_dangky | date:'dd/MM/yyyy HH:mm' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        } @else {
+          <p class="text-center py-3 empty-msg">Chưa có sinh viên nào đăng ký đề tài này.</p>
+        }
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-cancel" (click)="showStudentsModal = false">Đóng</button>
+      </div>
+    </div>
+  </div>
+}
+</div>

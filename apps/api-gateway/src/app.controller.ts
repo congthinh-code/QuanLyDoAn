@@ -1,12 +1,18 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { timeStamp } from 'node:console';
+import { timestamp } from 'rxjs';
 
-@Controller()
+@Controller('api')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('hello')
+  checkHello(){
+    return{
+      status:'OK',
+      message: 'NestJS và Angular kết nối thành công',
+      timestamp: new Date().toISOString(),
+    }
   }
 }

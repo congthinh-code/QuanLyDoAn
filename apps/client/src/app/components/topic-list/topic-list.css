@@ -1,0 +1,154 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.styled-table th, .styled-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: #f4f4f4;
+}
+
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.btn-primary { background-color: #007bff; color: white; }
+.btn-info { background-color: #17a2b8; color: white; }
+.btn-secondary { background-color: #6c757d; color: white; }
+.btn-cancel { background-color: #dc3545; color: white; }
+
+/* MODAL POPUP */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 450px;
+  max-width: 90%;
+}
+
+.modal-content.large {
+  width: 650px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.form-group input, .form-group textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Tiêu đề & Đề tài trong Modal */
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 6px;
+  color: #1e293b;
+  font-size: 1.25rem;
+}
+
+.topic-subtitle {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.topic-subtitle span {
+  font-weight: 600;
+  color: #007bff;
+}
+
+/* Khung cuộn cho Bảng trong Modal */
+.modal-body {
+  max-height: 380px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+/* Định dạng Bảng Modal */
+.styled-table {
+  background-color: #ffffff;
+}
+
+.styled-table thead th {
+  background-color: #f8fafc;
+  color: #334155;
+  font-weight: 600;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Bổ sung class Căn giữa & Badge Mã SV */
+.text-center {
+  text-align: center !important;
+}
+
+.fw-bold {
+  font-weight: 600;
+  color: #64748b;
+}
+
+.badge-sv {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+.empty-msg {
+  color: #94a3b8;
+  font-style: italic;
+}
