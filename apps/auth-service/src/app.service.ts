@@ -44,6 +44,7 @@ export class AppService implements OnModuleInit {
 
   // 1. Hàm Đăng nhập
   async login(username: string, pass: string) {
+    console.log('--> Đang thử login với:', { username, pass });
     const user = await this.taikhoanRepository.findOne({
       where: { username },
     });

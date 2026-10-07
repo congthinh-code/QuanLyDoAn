@@ -1,2 +1,11 @@
-<app-topic-list></app-topic-list>
-<router-outlet />
+<!-- Hiển thị trang Login nếu chưa có Token -->
+<app-login *ngIf="!isLoggedIn" (loggedIn)="checkLoginStatus()"></app-login>
+
+<!-- Hiển thị trang Profile và Topic List nếu đã có Token -->
+<div *ngIf="isLoggedIn">
+  <app-profile (loggedOut)="checkLoginStatus()"></app-profile>
+  <hr style="margin: 20px 0;">
+  <app-topic-list></app-topic-list>
+</div>
+
+<!-- <router-outlet /> -->

@@ -3,12 +3,13 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   // Cho Angular gọi API (cổng 4200)
   app.enableCors({
-    origin: '*',
+    origin: 'http://localhost:4200', // Đặt chính xác Origin của Angular
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type, Accept',
-    Credential: true,
+    allowedHeaders: 'Content-Type, Accept, Authorization', // Thêm Authorization để gửi JWT Token!
+    credentials: true, // Sửa thành credentials (viết thường, có 's')
   });
   
   app.setGlobalPrefix('api');
