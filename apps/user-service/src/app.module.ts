@@ -1,39 +1,30 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { StudentsModule } from './students/students.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
+    TypeOrmModule.forRoot({
+      type: 'mssql',
 
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
+      host: 'localhost',
+      port: 1433,
 
-      useFactory: (configService: ConfigService) => ({
-        type: 'mssql',
+      username: 'sa',
+      password: '123456',
 
-        host: configService.get<string>('DB_HOST'),
-        port: Number(configService.get<string>('DB_PORT')),
+      database: 'quanlydoan',
 
-        username: configService.get<string>('DB_USERNAME'),
-        password: configService.get<string>('DB_PASSWORD'),
+      autoLoadEntities: true,
 
-        database: configService.get<string>('DB_DATABASE'),
+      // Database va bang da duoc tao bang database.sql
+      synchronize: false,
 
-        autoLoadEntities: true,
-
-        // Database đã được tạo bằng database.sql
-        synchronize: false,
-
-        options: {
-          encrypt: false,
-          trustServerCertificate: true,
-        },
-      }),
+      options: {
+        encrypt: false,
+        trustServerCertificate: true,
+      },
     }),
 
     StudentsModule,
