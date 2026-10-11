@@ -1,12 +1,12 @@
 import {
   IsBoolean,
-  IsEmail,
   IsOptional,
   IsString,
   MaxLength,
 } from 'class-validator';
 
 export class UpdateStudentDto {
+
   @IsOptional()
   @IsString()
   @MaxLength(100)
@@ -23,12 +23,8 @@ export class UpdateStudentDto {
   khoa?: string;
 
   @IsOptional()
-  @IsEmail(
-    {},
-    {
-      message: 'Email không đúng định dạng',
-    },
-  )
+  @IsString()
+  @MaxLength(100)
   email?: string;
 
   @IsOptional()

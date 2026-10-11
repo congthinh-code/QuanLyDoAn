@@ -1,0 +1,181 @@
+<div class="container">
+
+  <h1>Quản lý sinh viên</h1>
+
+  <div class="form-card">
+
+    <h2>
+      {{ isEditing ? 'Sửa sinh viên' : 'Thêm sinh viên' }}
+    </h2>
+
+    <div class="form-grid">
+
+      <div>
+        <label>Mã sinh viên</label>
+
+        <input
+          type="text"
+          [(ngModel)]="formStudent.masv"
+          [disabled]="isEditing"
+          placeholder="VD: SV013"
+        />
+      </div>
+
+      <div>
+        <label>Họ tên</label>
+
+        <input
+          type="text"
+          [(ngModel)]="formStudent.hoten"
+          placeholder="Nhập họ tên"
+        />
+      </div>
+
+      <div>
+        <label>Lớp</label>
+
+        <input
+          type="text"
+          [(ngModel)]="formStudent.lop"
+          placeholder="VD: CNTT01"
+        />
+      </div>
+
+      <div>
+        <label>Khoa</label>
+
+        <input
+          type="text"
+          [(ngModel)]="formStudent.khoa"
+        />
+      </div>
+
+      <div>
+        <label>Email</label>
+
+        <input
+          type="email"
+          [(ngModel)]="formStudent.email"
+          placeholder="example@gmail.com"
+        />
+      </div>
+
+      <div>
+        <label>Trạng thái</label>
+
+        <select
+          [(ngModel)]="formStudent.trangthai"
+        >
+          <option [ngValue]="true">
+            Đủ điều kiện
+          </option>
+
+          <option [ngValue]="false">
+            Chưa đủ điều kiện
+          </option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="buttons">
+
+      <button
+        class="btn-save"
+        (click)="saveStudent()"
+      >
+        {{ isEditing ? 'Cập nhật' : 'Thêm sinh viên' }}
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="list-card">
+
+    <div class="list-header">
+
+      <h2>Danh sách sinh viên</h2>
+
+      <input
+        class="search"
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Tìm mã SV, họ tên, lớp..."
+      />
+
+    </div>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Mã SV</th>
+          <th>Họ tên</th>
+          <th>Lớp</th>
+          <th>Khoa</th>
+          <th>Email</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="let student of filteredStudents"
+        >
+
+          <td>{{ student.masv }}</td>
+
+          <td>{{ student.hoten }}</td>
+
+          <td>{{ student.lop }}</td>
+
+          <td>{{ student.khoa }}</td>
+
+          <td>{{ student.email }}</td>
+
+          <td>
+
+            <span
+              class="status"
+              [class.active]="student.trangthai"
+              [class.inactive]="!student.trangthai"
+            >
+              {{
+                student.trangthai
+                  ? 'Đủ điều kiện'
+                  : 'Chưa đủ điều kiện'
+              }}
+            </span>
+
+          </td>
+
+          <td>
+
+            <button
+              class="btn-edit"
+              (click)="editStudent(student)"
+            >
+              Sửa
+            </button>
+
+            <button
+              class="btn-delete"
+              (click)="deleteStudent(student.masv)"
+            >
+              Xóa
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
