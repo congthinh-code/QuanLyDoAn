@@ -15,7 +15,7 @@ export class DangKy {
   @CreateDateColumn({ type: 'timestamp' })
   ngay_dangky: Date;
 
-  @ManyToOne(() => DeTai, (detai) => detai.danhSachDangKy, { onDelete: 'CASCADE' })
+  @ManyToOne(() => DeTai, (detai: DeTai) => detai.danhSachDangKy, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'madetai' })
   detai: DeTai;
 }

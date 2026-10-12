@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ export class LoginComponent {
 
   @Output() loggedIn = new EventEmitter<void>();
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   onLogin(): void {
     this.authService.login({ username: this.username, password: this.password }).subscribe({
@@ -48,7 +50,7 @@ export class LoginComponent {
         }
 
         // 🟢 2. Báo cho App component biết để đổi giao diện sang Profile
-        this.loggedIn.emit();
+        this.router.navigate(['/students']);
       },
       error: () => {
         this.errorMessage = 'Sai tài khoản hoặc mật khẩu!';

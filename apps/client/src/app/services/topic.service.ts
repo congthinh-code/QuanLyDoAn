@@ -23,7 +23,7 @@ export interface StudentRegistration {
   providedIn: 'root'
 })
 export class TopicService {
-  private apiUrl = 'http://localhost:3000/topics';
+  private apiUrl = 'http://localhost:3002/topics';
 
   constructor(private http: HttpClient) {}
 
