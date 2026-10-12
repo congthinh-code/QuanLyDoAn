@@ -10,7 +10,7 @@ import { Student } from './student.model';
 export class StudentService {
 
   private apiUrl =
-    'http://localhost:3001/sinhvien';
+    'http://localhost:3003/sinhvien';
 
   constructor(
     private http: HttpClient

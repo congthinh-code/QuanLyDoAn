@@ -21,6 +21,6 @@ export class DeTai {
   @Column({ name: 'soluongdadangky', type: 'int', default: 0 })
   soluongdadangky: number;
 
-  @OneToMany(() => DangKy, (dangky) => dangky.detai)
+  @OneToMany(() => DangKy, (dangky:DangKy) => dangky.detai)
   danhSachDangKy: DangKy[];
 }

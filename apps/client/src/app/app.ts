@@ -40,7 +40,7 @@ export class App implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.testConnection();
+    // this.testConnection();
     this.checkLoginStatus();
   }
 

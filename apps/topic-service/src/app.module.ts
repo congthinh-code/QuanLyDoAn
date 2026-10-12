@@ -9,7 +9,8 @@ import { DangKy } from './topic/entities/dangky.entity';
     TypeOrmModule.forRoot({
       type: 'mssql',
       host: 'localhost',
-      username: 'thao',
+      port: 1433,
+      username: 'sa',
       password: '123456',
       database: 'quanlydoan_topic_db',
       entities: [DeTai, DangKy],
@@ -17,7 +18,7 @@ import { DangKy } from './topic/entities/dangky.entity';
       options: {
         encrypt: false,
         trustServerCertificate: true,
-        instanceName: 'SQLEXPRESS',
+        // instanceName: 'SQLEXPRESS',
       },
     }),
     TopicModule,

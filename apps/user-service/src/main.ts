@@ -14,7 +14,10 @@ async function bootstrap() {
   const app =
     await NestFactory.create(AppModule);
 
-  app.enableCors();
+  app.enableCors({
+    origin: 'http://localhost:4200', // Hoặc để true để cho phép tất cả các nguồn
+    credentials: true,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -25,7 +28,7 @@ async function bootstrap() {
   );
 
   const port =
-    process.env.PORT || 3001;
+    process.env.PORT || 3003;
 
   await app.listen(port);
 

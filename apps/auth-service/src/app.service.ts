@@ -23,22 +23,40 @@ export class AppService implements OnModuleInit {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash('123456', salt);
 
-    const user = await this.taikhoanRepository.findOne({
+    // 1. Kiểm tra và seed tài khoản SV01
+    const userSV = await this.taikhoanRepository.findOne({
       where: { username: 'SV01' },
     });
 
-    if (!user) {
+    if (!userSV) {
       const testAccount = this.taikhoanRepository.create({
         username: 'SV01',
         password: hashedPassword,
         role: 'STUDENT',
       } as Partial<Taikhoan>);
       await this.taikhoanRepository.save(testAccount);
-      console.log('✅ Đã khởi tạo tài khoản SV01 với pass: 123456');
+      console.log('✅ Đã khởi tạo tài khoản SV01');
     } else {
-      user.password = hashedPassword;
-      await this.taikhoanRepository.save(user);
-      console.log('✅ Đã cập nhật lại mật khẩu hash chuẩn cho SV01: 123456');
+      userSV.password = hashedPassword;
+      await this.taikhoanRepository.save(userSV);
+    }
+
+    // 🟢 2. Kiểm tra và seed thêm tài khoản ADMIN
+    const userAdmin = await this.taikhoanRepository.findOne({
+      where: { username: 'admin' },
+    });
+
+    if (!userAdmin) {
+      const adminAccount = this.taikhoanRepository.create({
+        username: 'admin',
+        password: hashedPassword, // Mật khẩu là '123456'
+        role: 'ADMIN',
+      } as Partial<Taikhoan>);
+      await this.taikhoanRepository.save(adminAccount);
+      console.log('✅ Đã khởi tạo tài khoản admin với pass: 123456');
+    } else {
+      userAdmin.password = hashedPassword;
+      await this.taikhoanRepository.save(userAdmin);
     }
   }
 

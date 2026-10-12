@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
 @Entity('taikhoan')
 export class Taikhoan {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: string; // Trùng với masv hoặc username (Ví dụ: "SV01")
 
   @Column({ unique: true })
