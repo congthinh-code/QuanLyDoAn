@@ -10,7 +10,7 @@ import { DangKy } from './topic/entities/dangky.entity';
       type: 'mssql',
       host: 'localhost',
       port: 1433,
-      username: 'sa',
+      username: 'thao',
       password: '123456',
       database: 'quanlydoan_topic_db',
       entities: [DeTai, DangKy],

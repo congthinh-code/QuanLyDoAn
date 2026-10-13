@@ -90,23 +90,34 @@ export class TopicListComponent implements OnInit {
 
   // Xem danh sách sinh viên đăng ký đề tài
   viewStudents(topic: Topic): void {
-  if (!topic) return;
+    if (!topic) return;
 
-  const topicId = (topic as any).id || (topic as any).madetai;
-  this.selectedTopicTitleForStudents = topic.tendetai;
-  this.registeredStudents = [];
+    const topicId = (topic as any).id || (topic as any).madetai;
+    this.selectedTopicTitleForStudents = topic.tendetai;
+    this.registeredStudents = [];
 
-  this.topicService.getRegisteredStudents(topicId).subscribe({
-    next: (res: any) => {
-      console.log('Dữ liệu Backend:', res);
-      // Lấy đúng mảng danhSachSinhVien từ response
-      this.registeredStudents = res?.danhSachSinhVien || (Array.isArray(res) ? res : []);
-      this.showStudentsModal = true;
-      this.cdr.detectChanges(); // Ép Angular cập nhật lại UI
-    },
-    error: (err: any) => {
-      console.error('Lỗi khi lấy danh sách sinh viên:', err);
-    }
-  });
-}
+    this.topicService.getRegisteredStudents(topicId).subscribe({
+      next: (res: any) => {
+        console.log('Dữ liệu Backend:', res);
+        this.registeredStudents = res?.danhSachSinhVien || (Array.isArray(res) ? res : []);
+        this.showStudentsModal = true;
+        this.cdr.detectChanges();
+      },
+      error: (err: any) => {
+        console.error('Lỗi khi lấy danh sách sinh viên:', err);
+      }
+    });
+  }
+
+  // Hàm đóng modal sinh viên đăng ký (Khắc phục lỗi đơ nút)
+  closeStudentModal(): void {
+    this.showStudentsModal = false;
+    this.cdr.detectChanges();
+  }
+
+  // Hàm đóng modal chi tiết đề tài
+  closeDetailModal(): void {
+    this.showDetailModal = false;
+    this.cdr.detectChanges();
+  }
 }
