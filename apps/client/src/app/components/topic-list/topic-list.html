@@ -80,7 +80,7 @@
         <p><strong>Số lượng tối đa:</strong> {{ selectedTopic.soluongtoida }}</p>
         <p><strong>Đã đăng ký:</strong> {{ selectedTopic.soluongdadangky ?? 0 }}</p>
         <div class="modal-actions">
-          <button class="btn btn-cancel" (click)="showDetailModal = false">Đóng</button>
+          <button class="btn btn-cancel" (click)="closeDetailModal()">Đóng</button>
         </div>
       </div>
     </div>
@@ -123,7 +123,7 @@
       </div>
 
       <div class="modal-actions">
-        <button class="btn btn-cancel" (click)="showStudentsModal = false">Đóng</button>
+        <button class="btn btn-cancel" (click)="closeStudentModal()">Đóng</button>
       </div>
     </div>
   </div>
